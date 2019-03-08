@@ -8,6 +8,12 @@
 			"branch": "master"
 		},
 		{
+			"importpath": "github.com/gorilla/mux",
+			"repository": "https://github.com/gorilla/mux",
+			"revision": "15a353a636720571d19e37b34a14499c3afa9991",
+			"branch": "master"
+		},
+		{
 			"importpath": "github.com/gorilla/websocket",
 			"repository": "https://github.com/gorilla/websocket",
 			"revision": "0ec3d1bd7fe50c503d6df98ee649d81f4857c564",
