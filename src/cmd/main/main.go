@@ -1,8 +1,8 @@
 package main
 
 import (
-	"chat-websocket/src/auth"
-	"chat-websocket/src/db"
+	"chat-websocket/src/cmd/auth"
+	"chat-websocket/src/cmd/db"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -11,20 +11,19 @@ import (
 )
 
 func main() {
-	d := db.GetDB()
-	defer d.Close()
-
 	r := mux.NewRouter()
-	//dir := "./front/build"
-	//r.PathPrefix("/").Handler(http.FileServer(http.Dir(dir)))
+	dir := "./front/build"
+	//r.Path("/static").Handler(http.FileServer(http.Dir(dir)))
 	r.PathPrefix("/api/auth").HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		name := request.Header.Get("name")
 		pass := request.Header.Get("password")
 		us, err := auth.Register(name, pass)
-		writer.Header().Set("Content-Type", "application/json")
-		if err != nil {
+		if err != nil || us == nil {
 			http.Error(writer, "go avay", http.StatusNotAcceptable)
+			return
 		}
+		writer.Header().Set("Content-Type", "application/json")
+		log.Println(us)
 		res := auth.ResponseAuth{
 			Token:   us.Token,
 			Message: "OK",
@@ -33,6 +32,7 @@ func main() {
 		_, _ = writer.Write(data)
 	})
 
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir(dir)))
 	srv := &http.Server{
 		Handler: r,
 		Addr:    "127.0.0.1:8000",
@@ -41,5 +41,6 @@ func main() {
 		ReadTimeout:  15 * time.Second,
 	}
 
+	defer db.Close()
 	log.Fatal(srv.ListenAndServe())
 }

@@ -13,6 +13,8 @@ function userData(
     action
 ) {
     switch (action.type) {
+        case 'AUTH':
+            console.log(action);
         default:
             return state;
     }

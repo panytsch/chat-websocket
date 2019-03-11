@@ -21,13 +21,13 @@ class Login extends React.Component{
                 <br/>
                 <input type="text" ref={e => this.input.password = e}/>
                 <br/>
-                <button onClick={() => this.props.login(this.input.name, this.input.password)}>OK</button>
+                <button onClick={() => this.props.loginProps(this.input.name, this.input.password)}>OK</button>
             </div>
         )
     }
 }
 const mapDispatchToProps = dispatch => ({
-    login: (name, pass) => dispatch(login(name, pass))
+    loginProps: (name, pass) => dispatch(login(name, pass))
 });
 
 const mapStateToProps = state => ({
