@@ -1,9 +1,9 @@
 package db
 
 import (
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
 	"log"
-	_ "src/github.com/go-sql-driver/mysql"
-	"src/github.com/jinzhu/gorm"
 )
 
 var db *gorm.DB
@@ -18,7 +18,7 @@ func init() {
 }
 
 func Close() {
-	db.Close()
+	_ = db.Close()
 }
 
 func GetDB() *gorm.DB {

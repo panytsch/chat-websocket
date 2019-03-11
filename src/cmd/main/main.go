@@ -4,9 +4,9 @@ import (
 	"chat-websocket/src/cmd/auth"
 	"chat-websocket/src/cmd/db"
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-	"src/github.com/gorilla/mux"
 	"time"
 )
 
