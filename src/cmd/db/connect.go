@@ -13,7 +13,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-
+	d.Exec("ALTER DATABASE `chat-go` CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;")
 	db = d
 }
 

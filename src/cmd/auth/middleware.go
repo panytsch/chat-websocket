@@ -18,11 +18,13 @@ func Register(name string, pass string) (*user.User, error) {
 	us, err := auth(name, pass)
 	if err != nil {
 		log.Println("here")
-		buf := []byte(name + pass)
+		buf := name + pass
+		token := Encrypt(buf, DefaultSecret)
+		log.Println(token)
 		us = &user.User{
 			Name:     name,
 			Password: pass,
-			Token:    string(Encrypt(buf, DEFAULT_SECRET)),
+			Token:    string(token),
 		}
 		log.Println("token length: ", len(us.Token))
 		us.SaveNew()

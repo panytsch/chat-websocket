@@ -39,7 +39,10 @@ func FindById(id int) *User {
 }
 
 func FindByNamePass(name string, pass string) *User {
-	var user *User
+	var user = &User{}
 	db.GetDB().Where("name = ? and password = ?", name, pass).Find(user)
-	return user
+	if user.ID != 0 {
+		return user
+	}
+	return nil
 }
