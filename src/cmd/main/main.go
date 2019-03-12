@@ -17,6 +17,10 @@ func main() {
 	r.PathPrefix("/api/auth").HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		name := request.Header.Get("name")
 		pass := request.Header.Get("password")
+		if len(name) > 30 || len(pass) > 30 {
+			http.Error(writer, "go avay", http.StatusNotAcceptable)
+			return
+		}
 		us, err := auth.Register(name, pass)
 		if err != nil || us == nil {
 			http.Error(writer, "go avay", http.StatusNotAcceptable)

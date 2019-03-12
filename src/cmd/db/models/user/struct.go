@@ -11,9 +11,9 @@ func init() {
 
 type User struct {
 	models.Model
-	Name     string `gorm:"type:varchar(300);unique_index"`
-	Password string `gorm:"type:varchar(300)"`
-	Token    string `gorm:"type:varchar(300);unique_index"`
+	Name     string `gorm:"type:varchar(30);unique_index;not null"`
+	Password string `gorm:"type:varchar(30); not null"`
+	Token    string `gorm:"type:varchar(300);unique_index;not null"`
 }
 
 func (User) TableName() string {
