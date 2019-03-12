@@ -21,7 +21,7 @@ class Login extends React.Component{
                 <br/>
                 <input type="text" ref={e => this.input.password = e}/>
                 <br/>
-                <button onClick={() => this.props.loginProps(this.input.name, this.input.password)}>OK</button>
+                <button onClick={() => this.props.loginProps(this.input.name.value, this.input.password.value)}>OK</button>
             </div>
         )
     }
