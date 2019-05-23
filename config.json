@@ -1,0 +1,7 @@
+{
+  "db": {
+    "login": "{{set your credential here}}",
+    "password": "{{or create config-local.json file}}",
+    "dbName": "websocket-chat-v1"
+  }
+}

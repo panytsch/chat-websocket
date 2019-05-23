@@ -1,7 +1,0 @@
-CREATE TABLE `users` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `name` varchar(100) NOT NULL,
-  `password` varchar(300) NOT NULL,
-  `token` varchar(300) NOT NULL
-);
-
