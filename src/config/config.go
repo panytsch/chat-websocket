@@ -6,44 +6,29 @@ import (
 	"log"
 )
 
-var appConfig *config
+var AppConfig *config
 
 type config struct {
-	db dbConfig
+	DB *dbConfig `json:"db"`
 }
 
 type dbConfig struct {
-	login    string
-	password string
-	dbName   string
-}
-
-func (d *dbConfig) GetLogin() string {
-	return d.login
-}
-func (d *dbConfig) GetPassword() string {
-	return d.password
-}
-func (d *dbConfig) GetDBName() string {
-	return d.dbName
-}
-
-func (c *config) GetDBConfig() *dbConfig {
-	return &c.db
+	Login    string `json:"login"`
+	Password string `json:"password"`
+	DBName   string `json:"dbName"`
 }
 
 func init() {
+	AppConfig = &config{}
+
 	content, err := ioutil.ReadFile("./config-local.json")
 	if err != nil {
+		log.Println("reading main config file")
 		content, err = ioutil.ReadFile("./config.json")
 	}
-	log.Println(string(content))
-	err = json.Unmarshal(content, appConfig)
-	if err != nil {
-		log.Fatalln("cant unmarshal config file")
-	}
-}
 
-func GetConfig() *config {
-	return appConfig
+	err = json.Unmarshal(content, AppConfig)
+	if err != nil {
+		log.Fatalln("cant unmarshal config file", err.Error())
+	}
 }
